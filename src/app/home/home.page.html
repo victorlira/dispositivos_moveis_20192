@@ -1,14 +1,49 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      Aula 1 - IFPE
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
+    <h2>Novo Usuário</h2>
+    <input [(ngModel)]="newUser.name" placeholder="Digite aqui o seu nome..." type="text" name="nome" required>
+    <input [(ngModel)]="newUser.email" placeholder="Digite aqui o seu email..." type="email" name="email" required>    
+    
+    <button [disabled]="!newUser.name || !newUser.email" class="btn btn-primary btn-block" (click)="adicionarUsuario()" >Adicionar</button>
+    
+    <br>
+
+    <table *ngIf="lista.length > 0" class="striped">
+      <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Remover</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of lista">
+          <td>{{item.name}}</td>
+          <td>{{item.email}}</td>
+          <td (click)="remove(item)"> 
+            <i class="material-icons" style="text-align: center; color: red;">delete</i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p *ngIf="lista.length == 0"><i class="material-icons">mood_bad</i> Não há usuários cadastrados.</p>
+
+
+
+
+
+
+
+
   </div>
 </ion-content>
