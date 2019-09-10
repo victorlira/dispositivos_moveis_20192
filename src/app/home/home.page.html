@@ -26,11 +26,21 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let item of lista">
-          <td>{{item.name}}</td>
-          <td>{{item.email}}</td>
-          <td (click)="remove(item)"> 
-            <i class="material-icons" style="text-align: center; color: red;">delete</i>
+        <tr *ngFor="let usuario of lista">
+          <td>
+            <input *ngIf="usuario.isEditing" type="text" [(ngModel)]="usuario.name">
+            <span *ngIf="!usuario.isEditing" >{{usuario.name}}</span>
+          </td>
+          <td>
+              <input *ngIf="usuario.isEditing" type="text" [(ngModel)]="usuario.email">
+              <span *ngIf="!usuario.isEditing" >{{usuario.email}}</span>
+            </td>
+          <td>
+              <i *ngIf="!usuario.isEditing" (click)="edit(usuario)" class="material-icons" style="text-align: center; color: blue; margin-right: 5px;">edit</i> 
+              <i *ngIf="!usuario.isEditing" (click)="remove(usuario.uid)" class="material-icons" style="text-align: center; color: red;">delete</i>
+
+              <i *ngIf="usuario.isEditing" (click)="confirmEdit(usuario)" class="material-icons" style="text-align: center; color: green; margin-right: 5px;">done</i> 
+              <i *ngIf="usuario.isEditing" (click)="cancelEdit(usuario)" class="material-icons" style="text-align: center; color: red;">cancel</i>
           </td>
         </tr>
       </tbody>

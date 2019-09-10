@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <p>Bem vindo(a) ao IFPE</p>
+
+  <ion-item>
+    <ion-label position="floating">Login</ion-label>
+    <ion-input name="loginInput" [(ngModel)]="userLogin"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Senha</ion-label>
+    <ion-input name="passwordInput" [(ngModel)]="password"></ion-input>
+  </ion-item>
+
+  <ion-button [disabled]="!userLogin || !password" (click)="login()" expand="block" color="primary">ENTRAR</ion-button>
+</ion-content>
