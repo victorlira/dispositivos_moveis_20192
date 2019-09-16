@@ -12,6 +12,8 @@ import { environment } from 'src/environments/environment';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { DBService } from './services/db.service';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 
 @NgModule({
@@ -22,12 +24,14 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    DBService
   ],
   bootstrap: [AppComponent]
 })

@@ -9,7 +9,7 @@
 
   <ion-item>
     <ion-label position="floating">Login</ion-label>
-    <ion-input name="loginInput" [(ngModel)]="userLogin"></ion-input>
+    <ion-input name="loginInput" [(ngModel)]="email"></ion-input>
   </ion-item>
 
   <ion-item>
@@ -17,5 +17,5 @@
     <ion-input name="passwordInput" [(ngModel)]="password"></ion-input>
   </ion-item>
 
-  <ion-button [disabled]="!userLogin || !password" (click)="login()" expand="block" color="primary">ENTRAR</ion-button>
+  <ion-button [disabled]="!email || !password" (click)="login()" expand="block" color="primary">ENTRAR</ion-button>
 </ion-content>

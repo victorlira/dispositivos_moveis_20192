@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons (click)="goBack()" slot="start">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-buttons>
+    <ion-title>Usuários</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      USUÁRIOS CADASTRADOS
+    </ion-list-header>
+
+    <ion-item *ngFor="let user of users">
+      <ion-avatar slot="start">
+          <ion-icon *ngIf="!user.profile.isAdmin" name="contact"></ion-icon>
+          <ion-icon *ngIf="user.profile.isAdmin" name="key"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+        <h2>{{user.name}}</h2>
+        <h3>{{user.email}}</h3>
+        <p>{{user.profile.description}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

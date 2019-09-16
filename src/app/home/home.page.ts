@@ -1,17 +1,20 @@
 import { Component } from '@angular/core';
-import { User } from '../entities/user';
+import { User, Profile } from '../entities/user';
 
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 
 import { map } from 'rxjs/operators';
 import { DBService } from '../services/db.service';
+import { toBase64String } from '@angular/compiler/src/output/source_map';
+import { AuthenticationService } from '../services/authentication.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  providers: [ DBService ]
+  providers: [ DBService, AuthenticationService]
 })
 export class HomePage {
 
@@ -19,28 +22,61 @@ export class HomePage {
 
   lista: User[];
 
-  constructor(private dbService: DBService) {
+  perfis: Profile[];
+
+  isAuthenticatedUserAdmin: boolean;
+
+  loading: any;
+
+  constructor(private dbService: DBService, private authService: AuthenticationService, public loadingController: LoadingController) {
     this.lista = [];
     this.newUser = new User();
+
+    this.presentLoading();
+
+    this.inicializarDadosLogin();
+    this.inicializarPerfis();
     this.inicializarUsuarios();
+  }
+
+  async presentLoading() {
+    this.loading = await this.loadingController.create({
+      message: 'Aguarde'
+    });
+    await this.loading.present();
+
+  }
+
+  async inicializarDadosLogin() {
+    this.isAuthenticatedUserAdmin = await this.authService.isAdmin();
+
+    this.loading.dismiss();
+  }
+
+  async inicializarPerfis() {
+    this.perfis = await this.dbService.listWithUIDs<Profile>('perfis');
   }
 
   async inicializarUsuarios() {
     this.lista = await this.dbService.listWithUIDs<User>('usuarios');
   }
 
-  adicionarUsuario() {
-    alert('Usuário cadastrado com sucesso!');
+  async adicionarUsuario() {
+    await this.dbService.insertInList('usuarios', this.newUser);
 
-    this.dbService.insert('usuarios', this.newUser);
+    this.inicializarUsuarios();
+
+    alert('Usuário cadastrado com sucesso!');
 
     this.newUser = new User();
   }
 
-  remove(key: string) {
+  async remove(key: string) {
+    await this.dbService.remove('usuarios', key);
+
     alert('Usuário removido com sucesso!');
 
-    this.dbService.remove('usuarios', key);
+    this.inicializarUsuarios();
   }
 
   edit(usuario) {

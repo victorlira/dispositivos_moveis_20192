@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons (click)="goBack()" slot="start">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-buttons>
+    <ion-title>Cadastrar Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-input [(ngModel)]="newProfile.description" placeholder="Digite a descrição"></ion-input>
+  
+  <ion-toggle [(ngModel)]="newProfile.isAdmin" color="primary"></ion-toggle> Administrador?
+
+  <ion-item>
+    <ion-label>DD MM AAAA</ion-label>
+    <ion-datetime [(ngModel)]="selectedDate" displayFormat="DD MM YYYY" placeholder="Data Limite"></ion-datetime>
+  </ion-item>
+
+  <ion-button (click)="save()" expand="block">CADASTRAR</ion-button>
+</ion-content>
