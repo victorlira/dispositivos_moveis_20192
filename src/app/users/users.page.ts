@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DBService } from '../services/db.service';
 import { User, Profile } from '../entities/user';
+import { ModalController } from '@ionic/angular';
+import { EditUserPage } from '../edit-user/edit-user.page';
 
 @Component({
   selector: 'app-users',
@@ -12,7 +14,7 @@ export class UsersPage implements OnInit {
   perfis: Profile[];
   users: User[];
 
-  constructor(private dbService: DBService) {
+  constructor(private dbService: DBService, private modalController: ModalController) {
     this.inicializarDados();
   }
 
@@ -29,4 +31,13 @@ export class UsersPage implements OnInit {
   ngOnInit() {
   }
 
+  async edit(user: User) {
+    const modal = await this.modalController.create({
+      component: EditUserPage,
+      componentProps: {
+        editingUser: user
+      }
+    });
+    return await modal.present();
+  }
 }
