@@ -51,7 +51,7 @@ export class EditUserPage implements OnInit {
   async save() {
     await this.presentLoading();
 
-    await this.dbService.update('perfis', this.editingUser.uid, { name: this.editingUser.name, profileUID: this.editingUser.profileUID });
+    await this.dbService.update('usuarios', this.editingUser.uid, { name: this.editingUser.name, profileUID: this.editingUser.profileUID });
 
     await this.hideLoading();
 
