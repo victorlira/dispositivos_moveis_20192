@@ -3,10 +3,14 @@ import { ModalController, LoadingController, ToastController } from '@ionic/angu
 import { DBService } from '../services/db.service';
 import { Profile, User } from '../entities/user';
 
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { CameraService } from '../services/camera.service';
+
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.page.html',
   styleUrls: ['./edit-user.page.scss'],
+  providers: [Camera, CameraService]
 })
 export class EditUserPage implements OnInit {
 
@@ -17,7 +21,7 @@ export class EditUserPage implements OnInit {
 
   loading;
 
-  constructor(private modalController: ModalController, private dbService: DBService, private loadingController: LoadingController, private toastController: ToastController) {
+  constructor(private modalController: ModalController, private dbService: DBService, private loadingController: LoadingController, private toastController: ToastController, private cameraService: CameraService) {
     this.initialize();
    }
 
@@ -51,7 +55,7 @@ export class EditUserPage implements OnInit {
   async save() {
     await this.presentLoading();
 
-    await this.dbService.update('usuarios', this.editingUser.uid, { name: this.editingUser.name, profileUID: this.editingUser.profileUID });
+    await this.dbService.update('usuarios', this.editingUser.uid, { name: this.editingUser.name, profileUID: this.editingUser.profileUID, photo: this.editingUser.photo });
 
     await this.hideLoading();
 
@@ -66,5 +70,9 @@ export class EditUserPage implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+
+  async takePicture() {
+    this.editingUser.photo = await this.cameraService.takePicture();
   }
 }

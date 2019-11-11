@@ -11,8 +11,9 @@
 <ion-content class="ion-padding">
   <ion-grid>
     <ion-row class="photo-row">
-      <div>
-        <ion-icon name="contact"></ion-icon>
+      <div (click)="takePicture()">
+        <ion-icon *ngIf="!editingUser.photo" name="contact"></ion-icon>
+        <ion-img  *ngIf="editingUser.photo" [src]="editingUser.photo"></ion-img>
       </div>
     </ion-row>
     <ion-row>

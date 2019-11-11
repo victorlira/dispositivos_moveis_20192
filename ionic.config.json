@@ -1,5 +1,7 @@
 {
   "name": "aula",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

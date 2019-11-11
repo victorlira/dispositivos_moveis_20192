@@ -3,6 +3,7 @@ export class User {
     name: string;
     email: string;
     profileUID: string;
+    photo: string;
 }
 
 export class Profile {
