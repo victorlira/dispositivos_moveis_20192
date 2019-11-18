@@ -4,3 +4,21 @@ ion-list {
         color: #1192D5;
     }
 }
+
+.status-warning {
+    color: #FFCC00!important;
+    position: absolute;
+    right: 1vw;
+    top: 2vh;
+}
+
+.status-confirmed{
+    color: #339900!important;
+    position: absolute;
+    right: 1vw;
+    top: 2vh;
+}
+
+ion-card {
+    --background: blue;
+}

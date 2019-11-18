@@ -10,6 +10,7 @@ export class AuthenticationService {
 
     }
 
+
     async isAdmin() {
         return new Promise<boolean>((resolve, reject) => {
             this.afAuth.user

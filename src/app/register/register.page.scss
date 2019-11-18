@@ -1,0 +1,40 @@
+ion-content {
+    --ion-background-color: rgba(0,0,0,0.04);
+}
+
+.register-grid {
+    padding-top: 20vh;
+    padding-left: 4vw;
+
+    .register-input-item {
+        font-size: 1.8em;
+        color: #333;
+        margin-top: 2vh;
+        margin-bottom: 5vh;
+
+        ion-input {
+            border: 1px solid #3171e0;
+            border-radius: 5px;
+            text-align: center;
+            margin-left: 2vw;
+            margin-right: 2vw;
+        }
+
+        .input-area-code {
+            max-width: 15vw;
+        }
+
+        .input-part-one {
+            max-width: 28vw;
+        }
+
+        .input-part-two {
+            max-width: 25vw;
+        }
+    }
+
+    .btn-save {
+        width: 100vw;
+        font-size: 1.5em;
+    }
+}

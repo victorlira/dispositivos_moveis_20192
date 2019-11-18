@@ -4,6 +4,7 @@ export class User {
     email: string;
     profileUID: string;
     photo: string;
+    confirmed: boolean;
 }
 
 export class Profile {

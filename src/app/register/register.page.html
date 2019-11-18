@@ -1,0 +1,41 @@
+<ion-content>
+  <div id="recaptcha-container"></div>
+  <ion-grid *ngIf="!isSMSSent" class="register-grid">
+    <ion-row>
+        <ion-text color="primary">
+            <h2>Digite o seu celular</h2>
+          </ion-text>
+    </ion-row>
+    <ion-row>
+        <ion-item class="register-input-item">
+            <ion-text>(</ion-text>
+            <ion-input type="number" [(ngModel)]="areaCode" (keyup)="areaCodeChange()" maxlength="2" class="input-area-code" placeholder="XX"></ion-input>
+            <ion-text>)</ion-text>
+            <ion-input #partOneInput [(ngModel)]="partOne" type="number" (keyup)="partOneChange()"  maxlength="5" class="input-part-one" placeholder="XXXXX"></ion-input>
+            <ion-text>-</ion-text>
+            <ion-input #partTwoElement [(ngModel)]="partTwo" type="number" (keyup)="partTwoChange()"  maxlength="4" class="input-part-two" placeholder="XXXX"></ion-input>
+        </ion-item>
+    </ion-row>
+    <ion-row>
+        <ion-button (click)="sendSMS()" [disabled]="!isValid" class="btn-save" expand="block">Avançar</ion-button>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="isSMSSent" class="register-grid">
+      <ion-row>
+          <ion-text color="primary">
+              <h4>Digite abaixo o código de verificação enviado por SMS</h4>
+            </ion-text>
+      </ion-row>
+      <ion-row>
+          <ion-item class="register-input-item">
+              <ion-input [disabled]="isLoadingSMS" [(ngModel)]="code" (keyup)="codeChange()" type="number" maxlength="6" placeholder="XXXXX" class="input-part-one"></ion-input>
+          </ion-item>
+      </ion-row>
+      <ion-row *ngIf="isLoadingSMS">
+        <ion-text color="primary">
+          <h4>Aguarde enquanto validamos os dados...</h4>
+        </ion-text>
+      </ion-row>
+    </ion-grid>
+</ion-content>
